@@ -1,5 +1,6 @@
 package br.com.deveficiente.livros.novoAutor;
 
+import br.com.deveficiente.livros.compartilhado.UniqueValue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -12,6 +13,7 @@ public class NovoAutorRequest {
 
     @NotBlank
     @Email
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
 
     @NotBlank
