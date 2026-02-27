@@ -50,43 +50,81 @@ public class Livro {
     @JoinColumn(name = "autor_id")
     private Autor autor;
 
+
     public Long getId() {
         return id;
     }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
     public void setResumo(String resumo) {
         this.resumo = resumo;
+    }
+
+    public String getSumario() {
+        return sumario;
     }
 
     public void setSumario(String sumario) {
         this.sumario = sumario;
     }
 
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+    }
+
+    public int getNumeroPaginas() {
+        return numeroPaginas;
     }
 
     public void setNumeroPaginas(int numeroPaginas) {
         this.numeroPaginas = numeroPaginas;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public LocalDate getDataPublicacao() {
+        return dataPublicacao;
     }
 
     public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Autor getAutor() {
+        return autor;
     }
 
     public void setAutor(Autor autor) {
