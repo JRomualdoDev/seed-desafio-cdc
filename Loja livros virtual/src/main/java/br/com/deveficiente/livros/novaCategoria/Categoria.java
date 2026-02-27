@@ -25,7 +25,10 @@ public class Categoria {
 
     private LocalDateTime instanteCriacao = LocalDateTime.now();
 
-    public Categoria(String nome, String descricao) {
+    public Categoria(
+            @NotBlank String nome,
+            @NotBlank @Size(max = 400)String descricao
+    ) {
         this.nome = nome;
         this.descricao = descricao;
     }
