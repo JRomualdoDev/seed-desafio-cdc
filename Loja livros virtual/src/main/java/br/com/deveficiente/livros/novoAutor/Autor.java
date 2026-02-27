@@ -52,6 +52,10 @@ public class Autor {
         return email;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
     @Override
     public String toString() {
         return "Autor{" +
