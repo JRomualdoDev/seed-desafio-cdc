@@ -1,11 +1,11 @@
 package br.com.deveficiente.livros.novoLivro;
 
-public class ListaLivroOutput {
+public class ListaLivroResponse {
 
     private Long id;
     private String titulo;
 
-    public ListaLivroOutput(Long id, String titulo) {
+    public ListaLivroResponse(Long id, String titulo) {
         this.id = id;
         this.titulo = titulo;
     }
