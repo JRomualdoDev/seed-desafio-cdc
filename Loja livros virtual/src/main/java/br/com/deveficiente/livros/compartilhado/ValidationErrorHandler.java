@@ -1,5 +1,7 @@
 package br.com.deveficiente.livros.compartilhado;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -46,12 +49,21 @@ public class ValidationErrorHandler {
 
         globalErrors.forEach(error -> validationErrors.addError(getErrorMessage(error)));
 
-                fieldErrors.forEach(error -> {
-                    String errorMessage = getErrorMessage(error);
-                    validationErrors.addFieldError(error.getField(), errorMessage);
-                });
+        fieldErrors.forEach(error -> {
+            String errorMessage = getErrorMessage(error);
+            validationErrors.addFieldError(error.getField(), errorMessage);
+        });
         return validationErrors;
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(EntityNotFoundException.class) // Ou sua exceção personalizada
+    public ValidationErrorsOutputDto handleNotFound(EntityNotFoundException exception) {
+        ValidationErrorsOutputDto dto = new ValidationErrorsOutputDto();
+        dto.addError("Recurso não encontrado: " + exception.getMessage());
+        return dto;
+    }
+
 
     private String getErrorMessage(ObjectError error) {
         return messageSource.getMessage(error, LocaleContextHolder.getLocale());
