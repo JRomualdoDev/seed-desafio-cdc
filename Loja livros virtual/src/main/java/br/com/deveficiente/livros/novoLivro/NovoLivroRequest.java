@@ -2,10 +2,7 @@ package br.com.deveficiente.livros.novoLivro;
 
 import br.com.deveficiente.livros.compartilhado.UniqueValue;
 import br.com.deveficiente.livros.novaCategoria.Categoria;
-import br.com.deveficiente.livros.novaCategoria.CategoriaRepository;
-import br.com.deveficiente.livros.novaCategoria.LivroRepository;
 import br.com.deveficiente.livros.novoAutor.Autor;
-import br.com.deveficiente.livros.novoAutor.AutorRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.constraints.*;
@@ -13,9 +10,6 @@ import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
-
 public class NovoLivroRequest {
 
     @NotBlank
