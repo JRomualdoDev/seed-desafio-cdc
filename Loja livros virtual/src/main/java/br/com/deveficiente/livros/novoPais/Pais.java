@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Pais {
@@ -36,5 +37,17 @@ public class Pais {
 
     public String getNome() {
         return nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pais pais = (Pais) o;
+        return Objects.equals(nome, pais.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nome);
     }
 }
