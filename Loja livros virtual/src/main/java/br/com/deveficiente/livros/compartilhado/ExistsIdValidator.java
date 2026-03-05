@@ -1,0 +1,40 @@
+package br.com.deveficiente.livros.compartilhado;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+import java.util.List;
+
+public class ExistsIdValidator  implements ConstraintValidator<ExistsId, Object> {
+
+    private String domainAttribute;
+    private Class<?> klass;
+
+    @PersistenceContext
+    private EntityManager em;
+
+    @Override
+    public void initialize(ExistsId params) {
+        domainAttribute = params.fieldName();
+        klass = params.domainClass();
+    }
+
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+
+        if (value == null) {
+            return true;
+        }
+
+        Query query = em.createQuery("select 1 from " + klass.getName() + " where " + domainAttribute + " = :value");
+        query.setParameter("value", value);
+
+        List<?> list = query.getResultList();
+
+        return !list.isEmpty();
+    }
+
+}
